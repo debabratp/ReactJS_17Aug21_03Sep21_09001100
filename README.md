@@ -106,6 +106,7 @@ React JS
     is a SPA js library.
 
     1. Components
+    ------------------------------------------------------------------------------------
                     A single page is composed of reusable smart sections called components
 
                     index.html
@@ -219,6 +220,56 @@ React JS
                         components. It can accept a component , and attach the
                         new capability to it and then return it.
 
+    2. JSX
+    ------------------------------------------------------------------------------------
+        JavaScript eXtended Markup Language.
 
+        Assign a markup to a javascirpt variable.
 
+            const myHeaderElement = <h1>A simple heading</h1>.
+
+        Javascript functions can return a markup
+
+            function myFooterMarkup(){
+                return (<footer><p>A footer text</p></footer>);
+            }
+
+        Interpolation
+
+            <element>{javascriuptExpression}</element>
+
+            <h1>{pageTitle}</h1>
+
+            <h1>Hello, {formatName(user)}!</h1>
+
+            <p>Total Bill Amount is INR.{(rate*qty)+tax} </p>
+
+        Binding Attributes
+
+            const myLogoEle = <img src="../imgs/logo.png" />
+
+            const imgPath = "../imgs/logo.png";
+            const myLogoEle = <img src={imgPath} />
+
+        Conditional And Iterative Rendering
+
+            const friendsListElement = (
+                <div>
+                    {friends.length==0 ?
+                        <p>No friends as of now.</p> :
+                        <ul>
+                            {friends.map(friend => <li>{friend}</li>)}
+                        </ul>
+                    }
+                </div>
+            );
+
+    Bootstrap Integration
+    ---------------------------------------------------------------------------------
+
+        by including the bootstrap css as CDN link in the index.html file!
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
+        
 

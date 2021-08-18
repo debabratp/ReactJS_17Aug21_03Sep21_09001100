@@ -1,0 +1,16 @@
+.txnsList {
+    padding:10px;
+    width:65%;
+    margin:auto;
+}
+
+.txnsList>table{
+    width:100%;
+    border:1px solid #ffffff;
+    border-radius: 15px;
+}
+
+.txnsList>table th,.txnsList>table td{
+    border-bottom: .25px dotted #ffffff;
+    padding:5px;
+}
