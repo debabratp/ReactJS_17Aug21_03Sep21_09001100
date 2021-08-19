@@ -1,4 +1,5 @@
 import React from 'react'
+import NewTxn from './NewTxn';
 
 class TxnList extends React.Component{
     constructor(props){
@@ -13,8 +14,7 @@ class TxnList extends React.Component{
             ],
             totalIncome:90000,
             totalExpense:14500,
-            balance:75500,
-            txn :{id:0,header:'',amount:0,type:''}
+            balance:75500
         };
     }
 
@@ -28,10 +28,9 @@ class TxnList extends React.Component{
         this.setState({txns,totalExpense,totalIncome,balance});
     }
 
-    add = () => {
-        let txns = [...this.state.txns,{...this.state.txn}];
+    add = txn => {
+        let txns = [...this.state.txns,txn];
         this.computeAndUpdate(txns);
-        this.setState({txn:{id:0,header:'',amount:0,type:''}})
     }
 
     remove = (id) => {
@@ -46,28 +45,7 @@ class TxnList extends React.Component{
             <section className="col-sm-10 mx-auto m-4">
                 <h3>Transactions List</h3>
 
-                <form className="form-inline mb-2" onSubmit={e => {e.preventDefault(); this.add();}}>
-                <label>Txn Id:</label>
-                    <input type="number" className="form-control mr-2" value={this.state.txn.id}
-                    onChange={e => this.setState({txn:{...this.state.txn,id:parseInt(e.target.value??0)}})}/>
-
-                    <label>Header:</label>
-                    <input type="text" className="form-control mr-2" value={this.state.txn.header}
-                    onChange={e => this.setState({txn:{...this.state.txn,header:e.target.value}})}/>
-
-                    <label>Amount:</label>
-                    <input type="decimal" className="form-control mr-2" value={this.state.txn.amount}
-                    onChange={e => this.setState({txn:{...this.state.txn,amount:parseFloat(e.target.value??0)}})}/>
-                   
-                    <label>Type:</label>
-                    <select className="form-controll mr-2" value={this.state.txn.type}
-                    onChange={e => this.setState({txn:{...this.state.txn,type:e.target.value}})}>
-                        <option>--SELECT-----</option>
-                        <option value="INCOME">INCOME</option>
-                        <option value="EXPENSE">EXPENSE</option>
-                    </select>
-                    <button className="btn btn-sm btn-info">ADD</button>
-                </form>
+                <NewTxn addTxn={this.add($event)} />
 
                 {this.state.txns.length===0?
                     <p><strong>No transactions as of now</strong></p> :
