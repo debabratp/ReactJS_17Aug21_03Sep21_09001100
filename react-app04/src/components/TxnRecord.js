@@ -1,13 +1,13 @@
 
-const TxnRecord = props => (
+const TxnRecord = ({t,remove}) => (
     <tr>
-        <td>{props.t.id}</td>
-        <td>{props.t.header}</td>
-        <td className="text-right">{props.t.type === 'INCOME' ? props.t.amount : ''}</td>
-        <td className="text-right">{props.t.type === 'EXPENSE' ? props.t.amount : ''}</td>
+        <td>{t.id}</td>
+        <td>{t.header}</td>
+        <td className="text-right">{t.type === 'INCOME' ? t.amount : ''}</td>
+        <td className="text-right">{t.type === 'EXPENSE' ? t.amount : ''}</td>
         <td>
             <button
-                onClick={e => props.remove(props.t.id)}
+                onClick={e => remove(t.id)}
                 className="btn btn-sm btn-danger">
                 DELETE
             </button>

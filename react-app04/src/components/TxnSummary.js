@@ -1,9 +1,9 @@
 
-const TxnSummary = props => {
+const TxnSummary = ({txns}) => {
 
-    let incomes = props.txns.filter(t=>t.type==='INCOME')
+    let incomes = txns.filter(t=>t.type==='INCOME')
     let totalIncome = incomes.length===0?0:incomes.map(t => t.amount).reduce((a1,a2)=>a1+a2);
-    let expenses = props.txns.filter(t=>t.type==='EXPENSE');
+    let expenses = txns.filter(t=>t.type==='EXPENSE');
     let totalExpense = expenses.length===0?0:expenses.map(t => t.amount).reduce((a1,a2)=>a1+a2);
     let balance = totalIncome-totalExpense;
 

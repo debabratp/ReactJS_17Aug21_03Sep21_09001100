@@ -29,6 +29,14 @@ class TxnList extends React.Component{
         }        
     }
 
+    componentDidMount(){
+        console.log("Component first time rendering is complete");
+    }
+
+    componentDidUpdate(){
+        console.log("Component re-rednering done jsut now");
+    }
+
     render(){
         return (
             <section className="col-sm-10 mx-auto m-4">
