@@ -272,4 +272,152 @@ React JS
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 
         
+    Shadow DOM
+    ----------------------------------------------------------------------------------
 
+        DOM is a tree data structure that is created in the browser memory to 
+        represent all the elements as nodes in a html docuemnt.
+
+        Each tiem the content of the page has to be modified the node in the DOM tree
+        must be removed or added accordingly.
+
+        React observes the state of the component and detects any chagne in the state, if
+        the change detected it triggers the render method which inturn triggers
+        the DOM manipulation like complete reconstruc tion of the whole component contet.
+
+        But his will be very mcuh costly on the time and performence.
+
+        Each tiem the the render mehtod is triggred the change are not made to the actual DOM
+        but the changes are done (the whole recosntruction happens) on a temparary copy
+        the DOM calle dShadow DOM which is maintained along side of the actual dom by react.
+
+        One Shadow dom is updated, the update shadow dom is compared with the actual dom, and only
+        the differential chagnes will tkae place on actual DOM saving a lot of tiem and computaiton.
+
+
+    state and setState and props
+    ----------------------------------------------------------------------------------
+
+        React.Component
+
+            state
+                    is the only source of truth for a component.
+                    Any data the component has to hold is held in the 'state'
+                    On any change to the state the component is re-rendered by calling the render() method.
+
+                    'state' is not directly mutable. state is not suppoed to me modified directly,
+                    as its change has to trigger rendering.
+
+            setState()
+
+                    is a function of the Component class used to mutate (change) the 
+                    state of the component.
+
+                    the setState method take the partial state and overrides those proeprties
+                    in the 'state'
+
+
+            props
+
+                    is the set of attributes passed by the parent to the child component.
+                    And the props are immutable.
+
+    Form Handling
+    ----------------------------------------------------------------------------------
+
+        Controlled Component
+
+            we create objects called refs for each form field
+            and attache a ref to the form element. so that the dat
+            can be collected when once the form is submitted.
+
+            refs are very costly in terms of memory mangement,
+
+        UnControlled Component
+
+            we will laod the value of each state attribute in one form element.
+            and as and when the form element value is changed, the underlying state
+            attribute is also modified.
+
+        Assignment: InventoryManagementSystem
+
+                        an array of items as [
+                            {id:1,name:'A4 Sheet Bundle',qty:45,rate:156.77,stockType:'SOLD'},
+                            {id:2,name:'A4 Sheet Bundle',qty:45,rate:156.77,stockType:'PURCHASED'}
+                        ]
+
+                        list of all items
+                        with summary like total itmes purchsed
+                        and total items sold
+                        total purchase value (sum of (rate*qty) of all purchases)
+                        total sale value (sum of (rate*qty) of all sales)
+
+                        able to add an item or remove one.
+
+        React Component Life Cycle Methods
+        ------------------------------------------------------------------------
+
+            constructor()               //compoennt state initialization
+                ↓
+            render()                    //do not call setState here..
+                ↓
+            componentDidMount()         //means that the component loading is complete
+                |                       // equivalent to onload evnet
+                |                       // used to do the rest api calls.
+                |
+                \ When ever the state gets updated/chganed \
+                            |
+                            ↓
+                        render()            //do not call setState here..
+                            ↓
+                    componentDidUpdate()    //anything to be executed
+                                            //after the component is rendered,
+                                            ////do not call setState here..
+
+                 \ When ever an error occurs at the time component creation or rendering \
+                            |
+                            ↓
+                        componentDidCatch()
+                        
+                \ Just before the component un loads \
+                            |
+                            ↓
+                        componentWillUnmount()
+        
+            React Hooks
+            -------------------------------------------------
+
+                enable the functional component
+                to have lifecycle methods and local
+                state.
+
+                1. useState
+
+                            params: initialState
+                            return: [stateValue,functionToModifytheState]
+
+
+                    let [x,setX] = useState(0);
+                    let [emp,setEmp] = useState({empId:10,name:'vamsy'});
+
+                2. useEffect
+
+                            params: a function,an array (optional)
+                            return: none
+
+                        the function passed is executed
+                        after the render. (equivalent to
+                        componentDidMount and componentDidUpdate).
+
+                        the optional array is a array of dependencies.
+                        this array cna contain one or more local state
+                        fields of the component. When ever
+                        the local state field supplied in this array
+                        gets modified, the function passed will
+                        bve executed.
+
+                        if no array is passed, the fucntion executes
+                        after every render. 
+
+                        if an empty array is passed the function executes only once
+                        after the first render.
